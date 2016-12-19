@@ -1,4 +1,5 @@
 # azure-classic-mongodb-centos
+Please note powershell script is semi interactive!
 
 Situation where you need to use Classic deployment model. 
 OS base is Centos with latest mongodb repository at the time.
