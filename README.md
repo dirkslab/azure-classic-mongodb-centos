@@ -17,7 +17,8 @@ This script is mainly intended to add single mongodb servers to existing replica
 the extension shell script:
 very rough and can be improved.
 hard coded for  x4 data disk setup - hope to improve this
-no logging, no quick way to tell if script is complete- I generally login via ssh and run sudo lsblk command. If the raid setup is completed, script generally completed. not ideal (prob due to 
+no logging, no quick way to tell if script is complete- I generally login via ssh and run sudo lsblk command. If the raid setup is completed, script generally completed. not ideal
+server needs a reboot after this before mongo starts (prob due to disabling SELINUX) -to fix
 
 # how to use
 
