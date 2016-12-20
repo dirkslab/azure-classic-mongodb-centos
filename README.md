@@ -1,4 +1,5 @@
 # azure-classic-mongodb-centos
+2016-12-19
 Please note powershell script is semi interactive!
 
 Situation where you need to use Classic deployment model. 
@@ -20,6 +21,7 @@ hard coded for  x4 data disk setup - hope to improve this.
 no logging, no quick way to tell if script is complete- I generally login via ssh and run sudo lsblk command. If the raid setup is completed, script generally completed. not ideal.
 server needs a reboot after this before mongo starts (prob due to disabling SELINUX) -to fix
 
+
 # how to use
 
 download ps1 script
@@ -29,3 +31,6 @@ interact with script by filling in requested detail as it pops up in powershell 
 
 example:
 PS C:\temp> .\new-azurevmv-github.ps1 -SubscriptionName 'subscription-example4' -newcloudserviceconfirm yes -newcloudservicename atestmongocloud -vmName atestmongosvr -newstorageaccconfirm yes -vmSize Standard_D2_v2 -AzureLocation 'North Europe' -datadiskconfirmation yes -numDiskPrompt 4 -verbose
+
+# Notes
+1026-12-20 added mongodb-repl-setup1.sh. This bash script allows for adding different number of data disks (only tested with 2 and 4 disks Centos 7.2n) 
