@@ -40,7 +40,7 @@ Install_step2a()
 {
 hdd=$(find /dev/sd* ! -path "/dev/sda*" ! -path "/dev/sdb*")
 #if [[ $hdd == *1* ]] && echo "It's there" || echo "Couldn't find"
-if [[ $hdd == *1* ]] && echo "Cannot use. It contains existing partition!" 1>&2 >./mdadm.log || Install_step2
+[[ $hdd == *1* ]] && echo "Cannot use. It contains existing partition!" 1>&2 >./mdadm.log || Install_step2
 }
 
 Install_step3()
