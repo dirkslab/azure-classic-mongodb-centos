@@ -210,7 +210,7 @@ elseif ($newstorageaccconfirm -eq 'yes')
         $vmnamex = $vmName.ToLower()
         $pattern = '[^a-zA-Z1-9]'
         $vmnamexx = $vmnamex -replace $pattern, '' 
-        $StorageAccountName = "storage$vmnamexx"
+        $StorageAccountName = "$vmnamexx`storage"
         #$StorageAccountName = Read-Host "Type new AzureStorageAccount -no special characters -current format example: 'prpmongostorage015'"
         Write-Host "Creating new storage account $StorageAccountName" -ForegroundColor Yellow
         New-AzureStorageAccount -Location $AzureLocation -StorageAccountName $StorageAccountName
