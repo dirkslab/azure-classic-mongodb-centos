@@ -296,7 +296,7 @@ elseif ($datadiskconfirmation -eq 'yes')
 #$SelectedVM = Get-AzureVM -ServiceName "MyService" -Name "MyVM"
 #$PrivateConfiguration = '{"storageAccountName": "MyAccount","storageAccountKey":"Mykey"}' 
 #Specify the Location of the script from Azure blob, and command to execute
-$PublicConfiguration = '{"fileUris":["https://raw.githubusercontent.com/dirkslab/azure-classic-mongodb-centos/master/mongodb-repl-setup.sh"], "commandToExecute": "sh mongodb-repl-setup.sh" }' 
+$PublicConfiguration = '{"fileUris":["https://raw.githubusercontent.com/dirkslab/azure-classic-mongodb-centos/master/mongodb-repl-setup1.sh"], "commandToExecute": "sh mongodb-repl-setup1.sh" }' 
 	
 #Deploy the extension to the VM, always use the latest version by specify version “1.*”
 $ExtensionName = 'CustomScriptForLinux'  
