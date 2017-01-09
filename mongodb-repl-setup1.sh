@@ -36,6 +36,9 @@ mkdir /data_disk
 chmod 755 /data_disk
 }
 
+#using the find command we search for available disks to raid. using ! to exclude wilcard path sda and sdb. 
+#We also then check the hdd list for *1* which would indicate existing partition and log. if not we call a function to raid available disks.
+
 Install_step2a()
 {
 hdd=$(find /dev/sd* ! -path "/dev/sda*" ! -path "/dev/sdb*")
@@ -144,7 +147,7 @@ processManagement:
 net:
    port: 27017
 replication:
-   replSetName: "rs2"' > /etc/mongod.conf
+   replSetName: "rs0"' > /etc/mongod.conf
 
 # Create Mongo directories
 
@@ -330,4 +333,4 @@ Install_step3
 Install_step4
 Install_step5
 Install_step6
-Install_step7
+#Install_step7
