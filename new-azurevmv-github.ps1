@@ -55,11 +55,12 @@ Param(
 #####Set6#####
     [Parameter(Mandatory,HelpMessage = "Choose vmsize")]
     [ValidateSet(
-        "Standard_A0",
-        "Standard_A1",
-        "Standard_A2",
-        "Standard_A3",
-        "Standard_A4",
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "A5",
         "Standard_D2_v2",
         "Standard_D11_v2"
        )
@@ -94,7 +95,7 @@ Param(
 
 
 
-#AdminName and Password
+
 #Query Multiple Values at once with Prompt
 #http://activedirectoryfaq.com/2014/12/user-interactive-powershell-scripts/
 
@@ -128,6 +129,12 @@ $AdminName = $login.Name
 
 $secure_password = $login.Password
 
+#Select the subscription you want to work in
+
+#-#$x = Get-AzureSubscription | select SubscriptionName | Out-GridView -Title 'Choose Subscription' -PassThru 
+#-#$SubscriptionName = $x.SubscriptionName
+Select-AzureSubscription -SubscriptionName $SubscriptionName
+
 #vnet and subnet to use
 
 $x = (Get-AzureVNetSite) | select Name, AddressSpacePrefixes, subnets | Out-GridView -PassThru
@@ -143,11 +150,7 @@ $Subnet = $x.name
 $imgName = (Get-AzureVMImage) | select ImageName, OS, Label, ImageFamily | Out-GridView -PassThru
 $imgName = $imgName.ImageName
 
-#Select the subscription you want to work in
 
-#-#$x = Get-AzureSubscription | select SubscriptionName | Out-GridView -Title 'Choose Subscription' -PassThru 
-#-#$SubscriptionName = $x.SubscriptionName
-Select-AzureSubscription -SubscriptionName $SubscriptionName
 
 #Azure Location 
 
@@ -242,7 +245,7 @@ $medialocation | Write-Host -ForegroundColor Green
 
 $NewVMConfig = New-AzureVMConfig -ImageName $imgName -InstanceSize $vmSize -Name $vmName -DiskLabel $vmName -HostCaching ReadWrite -Label $vmName -MediaLocation $medialocation/vhds/$vmName.vhd
 Write-Host "Creating new vm $vmName" -ForegroundColor Yellow
-$NewVMConfig | Add-AzureProvisioningConfig -Linux -LinuxUser $AdminName -Password $secure_password | Set-AzureSubnet -SubnetNames $Subnet | New-Azurevm -ServiceName $serviceName -VNetName $VNetName 
+$NewVMConfig | Add-AzureProvisioningConfig -Linux -LinuxUser $AdminName -Password $secure_password | Set-AzureSubnet -SubnetNames $Subnet | New-Azurevm -ServiceName $serviceName -VNetName $VNetName -WaitForBoot
 Write-Host "Finished creating new vm $vmName" -ForegroundColor Yellow
 
 ###vmconfig and creation of new vm -End
@@ -297,7 +300,8 @@ elseif ($datadiskconfirmation -eq 'yes')
 #$PrivateConfiguration = '{"storageAccountName": "MyAccount","storageAccountKey":"Mykey"}' 
 #Specify the Location of the script from Azure blob, and command to execute
 $PublicConfiguration = '{"fileUris":["https://raw.githubusercontent.com/dirkslab/azure-classic-mongodb-centos/master/mongodb-repl-setup1.sh"], "commandToExecute": "sh mongodb-repl-setup1.sh" }' 
-	
+
+$SelectedVM = Get-AzureVM -ServiceName $servicename -Name $vmName	
 #Deploy the extension to the VM, always use the latest version by specify version “1.*”
 $ExtensionName = 'CustomScriptForLinux'  
 $Publisher = 'Microsoft.OSTCExtensions'  
