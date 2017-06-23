@@ -163,6 +163,8 @@ chown -R mongod:mongod /data_disk/mongo/logs
 chown -R mongod:mongod /data_disk/mongo/data
 
 # setup log rotation by using linux cron job to run bash script
+# create a scripts folder
+mkdir /etc/scripts/
 # first create your bash script.
  
 echo '#!/bin/bash
