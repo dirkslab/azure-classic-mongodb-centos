@@ -192,10 +192,11 @@ cat /etc/scripts/mongologrotation.sh
 # append after last line
 
 echo '5 0 * * * /etc/scripts/mongologrotation.sh'>/etc/scripts/mongologrotation.txt
+chmod 755 mongologrotation.sh
 crontab /etc/scripts/mongologrotation.txt
 crontab -l
 
-chmod 755 mongologrotation.sh  
+#chmod 755 mongologrotation.sh
 
 # Note: This will install the cron-file.txt to your crontab, which will also remove your old cron entries. 
 # So, please be careful while uploading cron entries from a cron-file.txt.
