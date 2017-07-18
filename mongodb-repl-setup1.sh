@@ -174,7 +174,9 @@ chown -R mongod:mongod /data_disk/mongo/data
 # setup log rotation by using linux cron job to run bash script
 # create a scripts folder
 mkdir /etc/scripts/
+
 # first create your bash script.
+# https://disqus.com/home/discussion/mongodb/logging_mongodb_10gen_confluence/
  
 echo '#!/bin/bash
 
@@ -182,7 +184,8 @@ echo '#!/bin/bash
 # we will then search for renamed log files older than 5 days and zip
 # maintenance- we will then find renamed files older than 31 days and delete
 
-/bin/kill -SIGUSR1 `cat /data_disk/mongo/data/mongod.lock 2> /dev/null`
+#/bin/kill -SIGUSR1 `cat /data_disk/mongo/data/mongod.lock 2> /dev/null`
+mongo --eval "db.getMongo().getDB(\"admin\").runCommand(\"logRotate\")";
 find /data_disk/mongo/logs/mongod.log.* -mtime +5 -execdir zip '{}'.zip '{}' -m -x *.zip \;
 find /data_disk/mongo/logs/mongod.log.* -mtime +31 -exec rm {} \;' > /etc/scripts/mongologrotation.sh
 
@@ -193,6 +196,7 @@ cat /etc/scripts/mongologrotation.sh
 
 echo '5 0 * * * /etc/scripts/mongologrotation.sh'>/etc/scripts/mongologrotation.txt
 chmod 755 mongologrotation.sh
+chmod 755 mongologrotation.txt
 crontab /etc/scripts/mongologrotation.txt
 crontab -l
 
