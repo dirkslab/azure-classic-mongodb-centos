@@ -109,7 +109,7 @@ name=MongoDB Repository
 baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.4/x86_64/
 gpgcheck=1
 enabled=1
-gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc' > /etc/yum.repos.d/mongodb-org-3.2.repo
+gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc' > /etc/yum.repos.d/mongodb-org-3.4.repo
 
 # Install MongoDB
 
@@ -181,13 +181,13 @@ mkdir /etc/scripts/
 echo '#!/bin/bash
 
 # This script below will rename the mongod log file with the date appended and open a new log file;
-# we will then search for renamed log files older than 5 days and zip
-# maintenance- we will then find renamed files older than 31 days and delete
+# we will then search for renamed log files older than 5 days and zip --removed this step, created new cron job
+# maintenance- we will then find renamed files older than 31 days and delete --removed this step, created new cron job
 
 #/bin/kill -SIGUSR1 `cat /data_disk/mongo/data/mongod.lock 2> /dev/null`
 mongo --eval "db.getMongo().getDB(\"admin\").runCommand(\"logRotate\")";
-find /data_disk/mongo/logs/mongod.log.* -mtime +5 -execdir zip '{}'.zip '{}' -m -x *.zip \;
-find /data_disk/mongo/logs/mongod.log.* -mtime +31 -exec rm {} \;' > /etc/scripts/mongologrotation.sh
+#find /data_disk/mongo/logs/mongod.log.* -mtime +5 -execdir zip '{}'.zip '{}' -m -x *.zip \;
+#find /data_disk/mongo/logs/mongod.log.* -mtime +31 -exec rm {} \;' > /etc/scripts/mongologrotation.sh
 
 cat /etc/scripts/mongologrotation.sh
 
@@ -203,8 +203,8 @@ chmod 755 /etc/scripts/mongologrotation.sh
 
 echo '#!/bin/bash
 
-# This script below will rename the mongod log file with the date appended and open a new log file;
-# we will then search for renamed log files older than 5 days and zip
+# This script below will rename the mongod log file with the date appended and open a new log file --running in own cron jojb now
+# we will search for renamed log files older than 5 days and zip
 # maintenance- we will then find renamed files older than 31 days and delete
 
 #/bin/kill -SIGUSR1 `cat /data_disk/mongo/data/mongod.lock 2> /dev/null`
@@ -214,7 +214,7 @@ find /data_disk/mongo/logs/mongod.log.* -mtime +31 -exec rm {} \;' > /etc/script
 
 cat /etc/scripts/mongologcleanup.sh
 
-# now create the cron job to run the log rotation bash script /etc/scripts/mongologrotation.sh
+# now create the cron job to run the log cleanup bash script /etc/scripts/mongologcleanup.sh
 # append after last line
 
 echo '6 5 * * * root /etc/scripts/mongologcleanup.sh' >> /etc/crontab
