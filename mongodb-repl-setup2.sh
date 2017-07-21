@@ -196,8 +196,8 @@ cat /etc/scripts/mongologrotation.sh
 
 echo '5 0 * * * root /etc/scripts/mongologrotation.sh' >> /etc/crontab
 #echo '5 0 * * * /etc/scripts/mongologrotation.sh'>/etc/scripts/mongologrotation.txt
-chmod 755 mongologrotation.sh
-chmod 755 mongologrotation.txt
+chmod 755 /etc/scripts/mongologrotation.sh
+#chmod 755 mongologrotation.txt
 #crontab /etc/scripts/mongologrotation.txt
 #crontab -l
 
@@ -219,8 +219,8 @@ cat /etc/scripts/mongologcleanup.sh
 
 echo '5 0 * * * root /etc/scripts/mongologcleanup.sh' >> /etc/crontab
 #echo '5 0 * * * /etc/scripts/mongologcleanup.sh'>/etc/scripts/mongologcleanup.txt
-chmod 755 mongologcleanup.sh
-chmod 755 mongologcleanup.txt
+chmod 755 /etc/scripts/mongologcleanup.sh
+#chmod 755 /etc/scripts/mongologcleanup.txt
 #crontab /etc/scripts/mongologcleanup.txt
 #crontab -l
 
