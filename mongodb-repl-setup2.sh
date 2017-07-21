@@ -194,7 +194,7 @@ cat /etc/scripts/mongologrotation.sh
 # now create the cron job to run the log rotation bash script /etc/scripts/mongologrotation.sh
 # append after last line
 
-echo '*/5 * * * * root /etc/scripts/mongologrotation.sh' >> /etc/crontab
+echo '5 0 * * * root /etc/scripts/mongologrotation.sh' >> /etc/crontab
 #echo '5 0 * * * /etc/scripts/mongologrotation.sh'>/etc/scripts/mongologrotation.txt
 chmod 755 mongologrotation.sh
 chmod 755 mongologrotation.txt
