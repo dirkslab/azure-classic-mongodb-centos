@@ -33,4 +33,5 @@ example:
 PS C:\temp> .\new-azurevmv-github.ps1 -SubscriptionName 'subscription-example4' -newcloudserviceconfirm yes -newcloudservicename atestmongocloud -vmName atestmongosvr -newstorageaccconfirm yes -vmSize Standard_D2_v2 -AzureLocation 'North Europe' -datadiskconfirmation yes -numDiskPrompt 4 -verbose
 
 # Notes
-1026-12-20 added mongodb-repl-setup1.sh. This bash script allows for adding different number of data disks (only tested with 2 and 4 disks Centos 7.2n) 
+2016-12-20 added mongodb-repl-setup1.sh. This bash script allows for adding different number of data disks (only tested with 2 and 4 disks Centos 7.2n)
+2017-07-21 added some small fixes. Updated name of mongodb repo. Fixed log rotation and log cleanup not running in crontab. Tested on Azure Image Centos 7.3
