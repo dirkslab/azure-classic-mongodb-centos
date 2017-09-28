@@ -36,7 +36,7 @@ PS C:\temp> .\new-azurevmv-github.ps1 -SubscriptionName 'subscription-example4' 
 2016-12-20 added mongodb-repl-setup1.sh. This bash script allows for adding different number of data disks (only tested with 2 and 4 disks Centos 7.2n)
 2017-07-21 added some small fixes. Updated name of mongodb repo. Fixed log rotation and log cleanup not running in crontab. Tested on Azure Image Centos 7.3
 
-mongodb-repl-setup2.sh basic mongodb replicaset member server
-mongodb-repl-setup3.sh this extension includes nightly mongodump. Mainly use this for my backup server
-mongodb-repl-setup4.sh this extension includes nightly mongodump as well as AzCopy docker container transferring files to Azure Blob Storage
+mongodb-repl-setup2.sh basic mongodb replicaset member server.
+mongodb-repl-setup3.sh this extension includes nightly mongodump. Mainly use this for my backup server.
+mongodb-repl-setup4.sh this extension includes nightly mongodump as well as AzCopy docker container transferring files to Azure Blob Storage.
 
